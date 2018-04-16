@@ -41,6 +41,7 @@ class Conversation(models.Model):
     def _calc_talk_percentage(self, arr):
         durations_arr = list(map(self._duration, arr))
         talk_percentage = sum(durations_arr)/arr[-1][1]
+        return talk_percentage
 
     def _duration(self, durations_arr):
         return durations_arr[1] - durations_arr[0]
@@ -90,7 +91,6 @@ class Conversation(models.Model):
 
     def save(self, *args, **kwargs):
         if not self.pk:
-            import ipdb; ipdb.set_trace()
             self._create_conversation()
         super(Conversation, self).save(args, kwargs)
 
