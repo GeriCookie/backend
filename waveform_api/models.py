@@ -1,7 +1,7 @@
 from django.db import models
 from django.contrib.postgres.fields import ArrayField
 import os
-
+   
 class Conversation(models.Model):
     created = models.DateTimeField(auto_now_add=True)
     longest_user_monologue = models.FloatField(null=True, blank=True,
@@ -23,7 +23,8 @@ class Conversation(models.Model):
                                           default=None),
                         size=2
                     )
-    )
+    ) 
+
     def _create_conversation(self):
         self.user = self._parse_log('user')
         self.customer = self._parse_log('customer')
@@ -88,7 +89,7 @@ class Conversation(models.Model):
             results.append(from_to_arr)
             from_to_arr = []
         return results
-
+    
     def save(self, *args, **kwargs):
         if not self.pk:
             self._create_conversation()
